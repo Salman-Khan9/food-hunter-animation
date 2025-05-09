@@ -20,7 +20,7 @@ const bg = ["#C2FF87", "#FF9C70", "#FFEB93", "#A0D2FF"];
 
 export default function FoodArc({ setBgIndex }) {
   const isMobile = typeof window !== "undefined" && window.innerWidth < 768;
-  const radius = isMobile ? 120 : 200;
+  const radius = isMobile ? 90 : 190;
 
   const [rotation, setRotation] = useState(0);
   const [activeIndex, setActiveIndex] = useState(0); // The item on top
@@ -47,7 +47,7 @@ export default function FoodArc({ setBgIndex }) {
         className="relative w-max h-max mx-auto flex flex-col items-center z-10  rounded-full"
         style={{ backgroundColor: bg[activeIndex] }}
       >
-        <div className="absolute w-[250px] h-[250px] md:w-[400px] md:h-[400px]  mix-blend-multiply top-7 md:top-12">
+        <div className="absolute w-[190px] h-[190px] md:w-[400px] md:h-[400px]  mix-blend-multiply top-14 md:top-12">
           <Image
             src="/images/circle.png"
             objectFit="cover"
@@ -72,8 +72,9 @@ export default function FoodArc({ setBgIndex }) {
                   key={i}
                   className="absolute"
                   style={{
-                    left: `${radius + x}px`,
-                    top: `${radius + y}px`,
+                    left: `calc(50% + ${x}px)`,
+                    top: `calc(50% + ${y}px)`,
+                    transform: "translate(-50%, -50%)",
                   }}
                 >
                   <div className="relative w-[75px] h-[75px]  md:w-[100px] md:h-[100px] rounded-full overflow-hidden z-20">
