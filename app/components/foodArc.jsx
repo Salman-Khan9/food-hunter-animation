@@ -20,7 +20,7 @@ const bg = ["#C2FF87", "#FF9C70", "#FFEB93", "#A0D2FF"];
 
 export default function FoodArc({ setBgIndex }) {
   const [isMobile, setIsMobile] = useState(false);
-  const radius = isMobile ? 85 : 190;
+  const radius = isMobile ? 90 : 190;
 
   const [rotation, setRotation] = useState(0);
   const [activeIndex, setActiveIndex] = useState(0); // The item on top
