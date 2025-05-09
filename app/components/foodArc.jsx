@@ -1,7 +1,7 @@
 "use client";
 import { motion } from "framer-motion";
 import Image from "next/image";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { ArrowLeft, ArrowRight } from "lucide-react";
 
 const foodItems = [
@@ -19,8 +19,8 @@ const mainItems = [
 const bg = ["#C2FF87", "#FF9C70", "#FFEB93", "#A0D2FF"];
 
 export default function FoodArc({ setBgIndex }) {
-  const isMobile = typeof window !== "undefined" && window.innerWidth < 768;
-  const radius = isMobile ? 90 : 190;
+  const [isMobile, setIsMobile] = useState(false);
+  const radius = isMobile ? 80 : 190;
 
   const [rotation, setRotation] = useState(0);
   const [activeIndex, setActiveIndex] = useState(0); // The item on top
@@ -40,6 +40,16 @@ export default function FoodArc({ setBgIndex }) {
     setActiveIndex((prev) => (prev - 1 + itemCount) % itemCount);
     setBgIndex(prevIndex);
   };
+  useEffect(() => {
+    const handleResize = () => {
+      setIsMobile(window.innerWidth < 768);
+    };
+
+    handleResize(); // check on mount
+    window.addEventListener("resize", handleResize); // check on resize
+
+    return () => window.removeEventListener("resize", handleResize); // cleanup
+  }, []);
 
   return (
     <div className="flex flex-col items-center justify-center">
